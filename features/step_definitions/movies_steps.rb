@@ -1,4 +1,3 @@
-
 Given /the following movies exist/ do |movies_table|
   movies_table.hashes.each do |movie|
     Movie.create movie
@@ -21,5 +20,15 @@ Then /I should see all the movies/ do
   # Make sure that all the movies in the app are visible in the table
   Movie.all.each do |movie|
     step %{I should see "#{movie.title}"}
+  end
+end
+
+
+Then /the director of "(.*)" should be "(.*)"/ do |string, string2|
+  
+  if Movie.find_by_title(string)[:director] == string2
+    
+  else
+    assert_equal string.director, string2
   end
 end

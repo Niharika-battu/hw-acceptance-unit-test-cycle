@@ -20,15 +20,13 @@ module NavigationHelpers
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
+
     
-    when /^the edit page for "(.*)"$/
-      edit_movie_path(Movie.find_by_title($1).id)
+    when /^the details page for "(.*)"$/ then "/movies/#{Movie.find_by_title($1)[:id]}"
       
-    when /^the details page for "(.*)"$/
-      movie_path(Movie.find_by_title($1).id)
-      
-    when /^the Similar Movies page for "(.*)"$/
-        similar_movies_path(Movie.find_by_title($1).id)  
+    when /^the Similar Movies page for "(.*)"$/ then "/movies/#{Movie.find_by_title($1)[:id]}/similar_movies"
+    
+    when /^the edit page for "(.*)"$/ then "/movies/#{Movie.find_by_title($1)[:id]}/edit"
 
     else
       begin
@@ -40,6 +38,8 @@ module NavigationHelpers
           "Now, go and add a mapping in #{__FILE__}"
       end
     end
+    
+    
   end
 end
 
